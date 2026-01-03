@@ -12,9 +12,9 @@ How to get Gmail App Password:
 import os
 
 # Email Configuration
-SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'kashsakp20@gmail.com')
-SENDER_PASSWORD = os.environ.get('SENDER_PASSWORD', 'jzvaybwdlqgkzvbb')
-RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', 'kashsakp20@gmail.com')
+SENDER_EMAIL = os.environ.get('SENDER_EMAIL', 'your.email@gmail.com')
+SENDER_PASSWORD = os.environ.get('SENDER_PASSWORD', 'your-app-password-here')
+RECIPIENT_EMAIL = os.environ.get('RECIPIENT_EMAIL', 'recipient@example.com')
 
 # Can send to multiple recipients
 RECIPIENT_EMAILS = [
