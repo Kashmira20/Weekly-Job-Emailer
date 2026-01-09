@@ -1,7 +1,3 @@
-"""
-Main application for Weekly Job Report Emailer
-"""
-
 import pandas as pd
 from datetime import datetime
 import sys
@@ -18,7 +14,7 @@ def save_data(df, filename=None):
         filename = config.CSV_FILENAME.format(date=date_str)
     
     df.to_csv(filename, index=False)
-    print(f"✅ Data saved to {filename}")
+    print(f"Data saved to {filename}")
 
 def generate_and_send_report():
     """
@@ -33,13 +29,13 @@ def generate_and_send_report():
     print("Step 1: Scraping job listings...")
     try:
         jobs_df = scrape_ai_jobs(max_pages=config.MAX_PAGES_TO_SCRAPE)
-        print(f"✅ Successfully scraped {len(jobs_df)} jobs\n")
+        print(f"Successfully scraped {len(jobs_df)} jobs\n")
     except Exception as e:
-        print(f"❌ Error scraping jobs: {e}")
+        print(f"Error scraping jobs: {e}")
         sys.exit(1)
     
     if jobs_df.empty:
-        print("⚠️ No jobs found. Exiting.")
+        print("No jobs found. Exiting.")
         sys.exit(0)
     
     # Step 2: Filter and analyze
@@ -49,7 +45,7 @@ def generate_and_send_report():
         keywords=config.JOB_SEARCH_KEYWORDS,
         top_n=config.TOP_N_JOBS
     )
-    print(f"✅ Found {len(top_jobs)} top jobs matching criteria\n")
+    print(f"Found {len(top_jobs)} top jobs matching criteria\n")
     
     # Step 3: Save data (optional)
     if config.SAVE_DATA_TO_CSV:
@@ -61,14 +57,14 @@ def generate_and_send_report():
     print("Step 4: Generating email content...")
     html_body = create_html_email(jobs_df, top_jobs)
     text_body = create_plain_text_email(jobs_df, top_jobs)
-    print("✅ Email content generated\n")
+    print("Email content generated\n")
     
     # Step 5: Send email
     print("Step 5: Sending email report...")
     
     # Validate configuration
     if config.SENDER_EMAIL == 'your.email@gmail.com' or config.SENDER_PASSWORD == 'your-app-password-here':
-        print("❌ Error: Please configure your email credentials in config.py")
+        print("Error: Please configure your email credentials in config.py")
         print("\nTo set up Gmail App Password:")
         print("1. Go to Google Account settings")
         print("2. Security > 2-Step Verification")
@@ -88,7 +84,7 @@ def generate_and_send_report():
         ):
             success_count += 1
     
-    print(f"\n✅ Successfully sent {success_count}/{len(config.RECIPIENT_EMAILS)} emails")
+    print(f"\nSuccessfully sent {success_count}/{len(config.RECIPIENT_EMAILS)} emails")
     
     # Step 6: Summary
     print("\n" + "=" * 50)

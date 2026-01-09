@@ -31,9 +31,9 @@ def save_data(df, filename=None):
     
     try:
         df.to_csv(filename, index=False)
-        print(f"✅ Data saved to {filename}")
+        print(f"Data saved to {filename}")
     except Exception as e:
-        print(f"⚠️ Could not save CSV: {e}")
+        print(f"Could not save CSV: {e}")
 
 def generate_and_send_report():
     """
@@ -46,7 +46,7 @@ def generate_and_send_report():
     
     # Validate configuration
     if not config.SENDER_EMAIL or not config.SENDER_PASSWORD or not config.RECIPIENT_EMAIL:
-        print("❌ Error: Email credentials not configured!")
+        print("Error: Email credentials not configured!")
         print("\nFor cloud deployment, set these environment variables:")
         print("  - SENDER_EMAIL")
         print("  - SENDER_PASSWORD")
@@ -57,13 +57,13 @@ def generate_and_send_report():
     print("Step 1: Scraping job listings...")
     try:
         jobs_df = scrape_ai_jobs(max_pages=config.MAX_PAGES_TO_SCRAPE)
-        print(f"✅ Successfully scraped {len(jobs_df)} jobs\n")
+        print(f"Successfully scraped {len(jobs_df)} jobs\n")
     except Exception as e:
-        print(f"❌ Error scraping jobs: {e}")
+        print(f"Error scraping jobs: {e}")
         sys.exit(1)
     
     if jobs_df.empty:
-        print("⚠️ No jobs found. Exiting.")
+        print("No jobs found. Exiting.")
         sys.exit(0)
     
     # Step 2: Filter and analyze
@@ -73,7 +73,7 @@ def generate_and_send_report():
         keywords=config.JOB_SEARCH_KEYWORDS,
         top_n=config.TOP_N_JOBS
     )
-    print(f"✅ Found {len(top_jobs)} top jobs matching criteria\n")
+    print(f"Found {len(top_jobs)} top jobs matching criteria\n")
     
     # Step 3: Save data (optional)
     if config.SAVE_DATA_TO_CSV:
@@ -85,7 +85,7 @@ def generate_and_send_report():
     print("Step 4: Generating email content...")
     html_body = create_html_email(jobs_df, top_jobs)
     text_body = create_plain_text_email(jobs_df, top_jobs)
-    print("✅ Email content generated\n")
+    print("Email content generated\n")
     
     # Step 5: Send email
     print("Step 5: Sending email report...")
@@ -103,7 +103,7 @@ def generate_and_send_report():
             ):
                 success_count += 1
     
-    print(f"\n✅ Successfully sent {success_count}/{len([r for r in config.RECIPIENT_EMAILS if r])} emails")
+    print(f"\nSuccessfully sent {success_count}/{len([r for r in config.RECIPIENT_EMAILS if r])} emails")
     
     # Step 6: Summary
     print("\n" + "=" * 50)

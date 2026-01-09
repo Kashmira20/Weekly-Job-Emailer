@@ -35,7 +35,7 @@ JOB_SEARCH_KEYWORDS = [
 TOP_N_JOBS = 5
 
 # Email Configuration
-EMAIL_SUBJECT = "🤖 Your Weekly AI Jobs Report"
+EMAIL_SUBJECT = "Your Weekly AI Jobs Report"
 SEND_HTML_EMAIL = True  # Set to False for plain text only
 
 # Schedule Configuration (for use with scheduler)

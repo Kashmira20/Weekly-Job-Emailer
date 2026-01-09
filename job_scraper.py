@@ -283,7 +283,7 @@ def create_sample_data():
     """
     Fallback: Create sample data if scraping fails
     """
-    print("📝 Creating sample data as fallback...")
+    print("Creating sample data as fallback...")
 
     sample_jobs = [
         {

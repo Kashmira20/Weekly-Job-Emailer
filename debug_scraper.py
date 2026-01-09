@@ -21,7 +21,7 @@ def debug_website_structure(url):
         # Save HTML to file for inspection
         with open('debug_page.html', 'w', encoding='utf-8') as f:
             f.write(soup.prettify())
-        print("✅ HTML saved to 'debug_page.html'\n")
+        print("HTML saved to 'debug_page.html'\n")
         
         # Find all common job-related elements
         print("ANALYZING PAGE STRUCTURE:")
@@ -44,7 +44,7 @@ def debug_website_structure(url):
                 elements = soup.find_all(tag)
             
             if elements and len(elements) > 0:
-                print(f"\n✅ Found {len(elements)} <{tag}> elements" + (f" with '{class_pattern}' in class" if class_pattern else ""))
+                print(f"\nFound {len(elements)} <{tag}> elements" + (f" with '{class_pattern}' in class" if class_pattern else ""))
                 
                 # Show first element structure
                 first = elements[0]
@@ -76,13 +76,13 @@ def debug_website_structure(url):
             print(f"   .{cls}")
         
         if not job_related:
-            print("   ⚠️ No obvious job-related classes found")
-            print("   Showing all classes (first 30):")
+            print("No obvious job-related classes found")
+            print("Showing all classes (first 30):")
             for cls in sorted(all_classes)[:30]:
                 print(f"   .{cls}")
         
     except Exception as e:
-        print(f"❌ Error: {e}")
+        print(f"Error: {e}")
 
 # Test different job sites
 if __name__ == "__main__":

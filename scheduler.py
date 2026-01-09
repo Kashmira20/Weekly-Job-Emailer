@@ -18,7 +18,7 @@ def job():
     try:
         generate_and_send_report()
     except Exception as e:
-        print(f"❌ Error running scheduled job: {e}")
+        print(f"Error running scheduled job: {e}")
 
 def start_scheduler():
     """
@@ -40,7 +40,7 @@ def start_scheduler():
     }
     
     if day not in day_mapping:
-        print(f"❌ Invalid day: {day}. Using Monday as default.")
+        print(f"Invalid day: {day}. Using Monday as default.")
         day = 'monday'
     
     # Schedule the job
